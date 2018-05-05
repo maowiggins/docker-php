@@ -156,6 +156,11 @@ RUN set -xe \
 	)" \
 	&& apk add --no-cache --virtual .php-rundeps $runDeps \
 	\
+# add mongodb-ext
+	&& apk add --no-cache autoconf dpkg-dev dpkg file g++ gcc libc-dev make pkgconf re2c \
+	&& apk add --no-cache --virtual .mongodb-ext-build-deps openssl-dev pcre-dev \
+	&& pecl install mongodb  \
+	&& docker-php-ext-enable mongodb \
 	&& apk del .build-deps \
 	\
 # https://github.com/docker-library/php/issues/443
