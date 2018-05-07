@@ -168,10 +168,11 @@ COPY docker-php-ext-* docker-php-entrypoint /usr/local/bin/
 RUN docker-php-ext-enable sodium
 
 RUN set -ex && \
-	apk add --no-cache autoconf dpkg-dev dpkg file g++ gcc libc-dev make pkgconf re2c && \
+	apk add --no-cache autoconf dpkg-dev dpkg file g++ gcc libc-dev make pkgconf re2c freetype-dev libjpeg-turbo-dev libpng-dev libpng && \
 	apk add --no-cache --virtual .mongodb-ext-build-deps openssl-dev pcre-dev && \
 	pecl install mongodb  && \
-	docker-php-ext-enable mongodb
+	docker-php-ext-enable mongodb && \
+	docker-php-ext-install pdo_mysql gd
 
 
 ENTRYPOINT ["docker-php-entrypoint"]
