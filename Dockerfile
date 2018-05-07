@@ -172,7 +172,8 @@ RUN set -ex && \
 	apk add --no-cache --virtual .mongodb-ext-build-deps openssl-dev pcre-dev && \
 	pecl install mongodb  && \
 	docker-php-ext-enable mongodb && \
-	docker-php-ext-install pdo_mysql gd
+	docker-php-ext-install pdo_mysql gd && \
+	rm -rf /var/cache/apk/* /tmp/*
 
 
 ENTRYPOINT ["docker-php-entrypoint"]
