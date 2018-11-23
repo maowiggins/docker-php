@@ -95,6 +95,12 @@ RUN set -x && \
 	make install && \
 	[ ! -e "${INSTALL_DIR}/etc/php.d" ] && mkdir -p ${INSTALL_DIR}/etc/php.d && \
 	/bin/cp php.ini-production ${INSTALL_DIR}/etc/php.ini && \
+#install fileinfo
+	cd ext/fileinfo && \
+	${INSTALL_DIR}/bin/phpize && \
+	./configure --with-php-config=${INSTALL_DIR}/bin/php-config && \
+	make -j "$(getconf _NPROCESSORS_ONLN)" && \
+	make install && \
 #Install libmemcached memcache-3.0.8
 	apk add --no-cache php5-memcache libmemcached-dev && \
 	mv /usr/lib/php5/modules/memcache.so ${INSTALL_DIR}/lib/php/20131226/memcache.so && \
