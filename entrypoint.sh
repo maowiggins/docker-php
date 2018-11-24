@@ -57,6 +57,10 @@ if [[ "${SWOOLE}" =~ ^[eE][nN][aA][bB][lL][eE]$ ]]; then
 	echo 'extension=swoole.so' > ${INSTALL_DIR}/etc/php.d/ext-swoole.ini
 fi
 
+if [[ "${FILEINFO}" =~ ^[eE][nN][aA][bB][lL][eE]$ ]]; then
+	echo 'extension=fileinfo.so' > ${INSTALL_DIR}/etc/php.d/ext-fileinfo.ini
+fi
+
 OPCACHE=${OPCACHE:-enable}
 
 XDEBUG_DEFAULT_CONF=${XDEBUG_DEFAULT_CONF:-enable}
